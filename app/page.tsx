@@ -2,17 +2,20 @@
 
 import { useEffect, useCallback, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { LoaderIcon } from 'lucide-react';
+import { LoaderIcon, XIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 import { getCommentsByQuery } from './actions';
+import Tooltip from '@/components/custom/tooltip';
+import TooltipProvider from '@/components/custom/tooltip';
 
 export default function SearchPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [query, setQuery] = useState('');
-  const [isFirsResearch, setIsFirsResearch] = useState(false);
+  const [isFirstResearch, setIsFirstResearch] = useState(false);
+  const [showInformativeTooltip, setShowInformativeTooltip] = useState(false);
 
   const {
     data: comments,
@@ -26,47 +29,60 @@ export default function SearchPage() {
 
   useEffect(() => {
     // Set a flag only at the first research
-    if (isSuccess && !isFirsResearch) {
-      setIsFirsResearch(true);
+    if (isSuccess && !isFirstResearch) {
+      setIsFirstResearch(true);
     }
-  }, [isSuccess, isFirsResearch]);
+  }, [isSuccess, isFirstResearch]);
 
   // Update input state
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setShowInformativeTooltip(false);
     setSearchTerm(event.target.value);
   };
 
-  //
+  const handleCloseTooltip = () => setShowInformativeTooltip(false);
+
   const handleSearch = useCallback(() => {
+    if (searchTerm.length <= 3) {
+      setShowInformativeTooltip(true);
+      return;
+    }
     setQuery(searchTerm);
   }, [searchTerm]);
 
   return (
     <main
       className={`flex flex-col items-center min-h-screen ${
-        isFirsResearch ? 'justify-top' : 'justify-center'
+        isFirstResearch ? 'justify-top' : 'justify-center'
       } pt-8`}
     >
-      <div className="flex w-full max-w-sm items-center space-x-2">
-        <Input
-          type="text"
-          placeholder="Search for a comment (e.g. 'enim')"
-          value={searchTerm}
-          onChange={handleSearchChange}
-          onKeyDown={(event) => {
-            if (event.key === 'Enter') {
-              handleSearch();
-            }
-          }}
-        />
-        <Button onClick={handleSearch} type="submit">
-          SEARCH
-        </Button>
-      </div>
+      <TooltipProvider
+        isVisible={showInformativeTooltip}
+        text="Search requires more than 3 characters."
+        onClose={handleCloseTooltip}
+      >
+        <div className="flex w-full max-w-sm items-center space-x-2">
+          <Input
+            type="text"
+            placeholder='Search for a comment (e.g., "enim")'
+            value={searchTerm}
+            onChange={handleSearchChange}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                handleSearch();
+              }
+            }}
+          />
+          <Button onClick={handleSearch} type="submit">
+            SEARCH
+          </Button>
+        </div>
+      </TooltipProvider>
 
       <div
+        aria-live="polite"
         className={`max-w-[950px] px-8 transition-opacity duration-500 ease-in-out ${
-          isFirsResearch ? 'opacity-100' : 'opacity-0'
+          isFirstResearch ? 'opacity-100' : 'opacity-0'
         }`}
       >
         {isSuccess && comments?.length > 0 && (
