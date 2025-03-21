@@ -12,7 +12,6 @@ interface Props {
 }
 
 export default function Tooltip({ children, text, isVisible, arrowPosition, onClose }: Props) {
-  
   const setArrowPosition = clsx({
     'left-5': arrowPosition === 'left',
     'right-5': arrowPosition === 'right',
@@ -23,7 +22,7 @@ export default function Tooltip({ children, text, isVisible, arrowPosition, onCl
     <div className="flex-grow flex flex-col items-center">
       {children}
       {isVisible && (
-        <div className="absolute min-w-[290px] top-20 p-2 bg-yellow-300 rounded-md text-sm shadow-md">
+        <div className="absolute min-w-[290px] top-20 p-2 bg-teal-200 rounded-md text-sm shadow-md">
           {text}
           <XIcon
             onClick={onClose}
@@ -32,7 +31,7 @@ export default function Tooltip({ children, text, isVisible, arrowPosition, onCl
             strokeWidth={3}
           />
           <div
-            className={`absolute ${setArrowPosition} bottom-full border-8 border-x-transparent border-t-transparent border-b-yellow-300`}
+            className={`absolute ${setArrowPosition} bottom-full border-8 border-x-transparent border-t-transparent border-b-teal-200`}
           ></div>
         </div>
       )}
