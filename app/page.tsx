@@ -2,13 +2,14 @@
 
 import { useEffect, useCallback, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { LoaderIcon } from 'lucide-react';
+import { LoaderCircleIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 import { getCommentsByQuery } from './actions';
 import Tooltip from '@/components/custom-ui/tooltip';
+import ResultItem from '@/components/custom-ui/resultItem';
 
 export default function SearchPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -92,8 +93,8 @@ export default function SearchPage() {
         {isSuccess && comments?.length > 0 && (
           <ul className="w-full">
             {comments.map((comment) => (
-              <li key={comment.id} className="border-b py-2">
-                {comment.body}
+              <li key={comment.id} className="py-2">
+                <ResultItem comment={comment} query={query} />
               </li>
             ))}
           </ul>
@@ -108,7 +109,7 @@ export default function SearchPage() {
 
       {isLoading && (
         <div className="flex items-center justify-center flex-grow">
-          <LoaderIcon className="animate-spin text-primary w-12 h-12" />
+          <LoaderCircleIcon className="animate-spin text-primary w-12 h-12" />
         </div>
       )}
     </main>
