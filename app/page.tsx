@@ -56,7 +56,7 @@ export default function SearchPage() {
       } `}
     >
       <div
-        className={`relative flex w-full max-w-sm items-center space-x-2 transition-all duration-500 ease-out-in pt-8 pb-12  ${
+        className={`relative flex w-full max-w-sm items-center space-x-2 transition-all duration-500 ease-out-in pt-8 pb-12 ${
           isFirstResearch ? 'top-0' : 'top-4'
         }`}
       >
