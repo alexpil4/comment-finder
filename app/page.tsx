@@ -2,14 +2,13 @@
 
 import { useEffect, useCallback, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { LoaderIcon, XIcon } from 'lucide-react';
+import { LoaderIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 import { getCommentsByQuery } from './actions';
-import Tooltip from '@/components/custom/tooltip';
-import TooltipProvider from '@/components/custom/tooltip';
+import Tooltip from '@/components/custom-ui/tooltip';
 
 export default function SearchPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -54,14 +53,19 @@ export default function SearchPage() {
     <main
       className={`flex flex-col items-center min-h-screen ${
         isFirstResearch ? 'justify-top' : 'justify-center'
-      } pt-8`}
+      } `}
     >
-      <TooltipProvider
-        isVisible={showInformativeTooltip}
-        text="Search requires more than 3 characters."
-        onClose={handleCloseTooltip}
+      <div
+        className={`relative flex w-full max-w-sm items-center space-x-2 transition-all duration-500 ease-out-in pt-8 pb-12  ${
+          isFirstResearch ? 'top-0' : 'top-4'
+        }`}
       >
-        <div className="flex w-full max-w-sm items-center space-x-2">
+        <Tooltip
+          isVisible={showInformativeTooltip}
+          text="Search requires more than 3 characters."
+          onClose={handleCloseTooltip}
+          arrowPosition="left"
+        >
           <Input
             type="text"
             placeholder='Search for a comment (e.g., "enim")'
@@ -73,20 +77,20 @@ export default function SearchPage() {
               }
             }}
           />
-          <Button onClick={handleSearch} type="submit">
-            SEARCH
-          </Button>
-        </div>
-      </TooltipProvider>
+        </Tooltip>
+        <Button onClick={handleSearch} type="submit">
+          SEARCH
+        </Button>
+      </div>
 
       <div
         aria-live="polite"
-        className={`max-w-[950px] px-8 transition-opacity duration-500 ease-in-out ${
+        className={`max-w-[950px] px-8 transition-opacity duration-500 ease-out-in ${
           isFirstResearch ? 'opacity-100' : 'opacity-0'
         }`}
       >
         {isSuccess && comments?.length > 0 && (
-          <ul className="mt-4 w-full">
+          <ul className="w-full">
             {comments.map((comment) => (
               <li key={comment.id} className="border-b py-2">
                 {comment.body}
