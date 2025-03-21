@@ -4,10 +4,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { commentNormalize } from '@/utils/commentNormalizer';
 import { Comment } from '@/types/Comment';
+import { ChevronRight } from 'lucide-react';
 
+import { Button } from '@/components/ui/button';
 import { UserRoundIcon } from 'lucide-react';
 
-export default function ResultItem({
+export default function ResultItemCard({
   comment: { postId, email, name, body },
   query,
 }: {
@@ -16,9 +18,9 @@ export default function ResultItem({
 }) {
   return (
     <Card>
-      <CardHeader className="p-3">
+      <CardHeader className="p-3 pb-2">
         <CardDescription className="text-sm flex items-center gap-3">
-          <Avatar className="w-[30px] h-[30px] text-xs">
+          <Avatar className="w-[35px] h-[35px] text-xs">
             <AvatarImage
               src={`https://mighty.tools/mockmind-api/content/human/${postId}.jpg`}
               alt={`${email}-avatar-image`}
@@ -28,6 +30,14 @@ export default function ResultItem({
             </AvatarFallback>
           </Avatar>
           {email}
+          <Button
+            aria-label="Open post"
+            className="ml-auto border-none"
+            variant="outline"
+            size="icon"
+          >
+            <ChevronRight />
+          </Button>
         </CardDescription>
         <CardTitle className="text-md">{name}</CardTitle>
       </CardHeader>

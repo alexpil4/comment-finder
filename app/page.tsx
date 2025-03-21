@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 
 import { getCommentsByQuery } from './actions';
 import Tooltip from '@/components/custom-ui/tooltip';
-import ResultItem from '@/components/custom-ui/resultItem';
+import ResultItemCard from '@/components/custom-ui/resultItemCard';
 
 export default function SearchPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -94,7 +94,7 @@ export default function SearchPage() {
           <ul className="w-full">
             {comments.map((comment) => (
               <li key={comment.id} className="py-2">
-                <ResultItem comment={comment} query={query} />
+                <ResultItemCard comment={comment} query={query} />
               </li>
             ))}
           </ul>
