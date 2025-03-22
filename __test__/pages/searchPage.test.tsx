@@ -1,10 +1,10 @@
 import { expect, test, describe, beforeEach, afterEach, vi } from 'vitest';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 
-import { TestQueryClientProvider } from '../utils/testQueryClientProvider';
 import SearchPage from '@/app/page';
+import { Comment } from '@/types/Comment';
 
-import { Comment } from './../../types/Comment';
+import { TestQueryClientProvider } from '../utils/testQueryClientProvider';
 
 // Fetch method mocking
 vi.mock('node-fetch', async () => {
@@ -17,6 +17,9 @@ vi.mock('node-fetch', async () => {
 
 describe('SearchPage', () => {
   let searchInput: HTMLElement, searchSubmitButton: HTMLElement;
+
+  const mockCommentBody =
+    'This enim is a comment This is a comment This is a comment This is a comment';
 
   // Reset before each test run
   beforeEach(() => {
@@ -32,7 +35,7 @@ describe('SearchPage', () => {
           id: 1,
           name: 'Test Comment',
           email: 'test@example.com',
-          body: 'This is a comment > 64 This is a comment > 64 This is a comment > 64 This is a comment > 64.',
+          body: mockCommentBody,
         },
       ],
     });
@@ -76,8 +79,6 @@ describe('SearchPage', () => {
 
   // 3.
   test('Should check there are not results and show tooltip when search query is <= 3 characters', async () => {
-    const searchInput = screen.getByRole('textbox', { name: /search for a comment/i });
-
     fireEvent.change(searchInput, { target: { value: '123' } });
 
     // Simulate the click event of search button
@@ -98,9 +99,9 @@ describe('SearchPage', () => {
 
   // 4.
   test('Should render results', async () => {
-    const searchInput = screen.getByRole('textbox', { name: /search for a comment/i });
+    const query = 'enim';
 
-    fireEvent.change(searchInput, { target: { value: 'enim' } });
+    fireEvent.change(searchInput, { target: { value: query } });
 
     // Simulate the click event of search button
     fireEvent.click(searchSubmitButton);
