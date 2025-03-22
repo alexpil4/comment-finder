@@ -82,7 +82,7 @@ export default function SearchPage() {
             }}
           />
         </Tooltip>
-        <Button onClick={handleSearch} type="submit" aria-label="Search for comments">
+        <Button onClick={handleSearch} type="submit" aria-label="Search button">
           SEARCH
         </Button>
       </div>
@@ -90,7 +90,7 @@ export default function SearchPage() {
       <div
         aria-live="polite"
         role="status"
-        className={`max-w-2xl px-8 transition-opacity duration-500 ease-out-in ${
+        className={`max-w-3xl px-8 transition-opacity duration-500 ease-out-in ${
           isFirstResearch ? 'opacity-100' : 'opacity-0'
         }`}
       >
@@ -122,7 +122,7 @@ export default function SearchPage() {
       {isSuccess && comments?.length === 0 && (
         <div className="flex items-center justify-center flex-grow">
           <p role="alert" aria-live="assertive" className="text-center text-gray-500">
-            Sorry, no comments were found for {query}.
+            {`Sorry, no comments were found for "${query}".`}
           </p>
         </div>
       )}
