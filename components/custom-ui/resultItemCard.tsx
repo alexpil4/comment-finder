@@ -18,7 +18,12 @@ export default function ResultItemCard({
   query: string;
 }) {
   return (
-    <Card className="flex items-center">
+    <Card
+      className="flex items-center"
+      role="article"
+      aria-labelledby={`comment-title-${postId}`}
+      aria-describedby={`comment-body-${postId}`}
+    >
       <div>
         <CardHeader className="p-3 pb-2">
           <CardDescription className="text-sm flex items-center gap-2">
