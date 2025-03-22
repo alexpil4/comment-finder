@@ -2,7 +2,6 @@
 
 import { useEffect, useCallback, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { LoaderCircleIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -10,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { getCommentsByQuery } from './actions';
 import Tooltip from '@/components/custom-ui/tooltip';
 import ResultItemCard from '@/components/custom-ui/resultItemCard';
+import LoaderItemCard from '@/components/custom-ui/loaderItemCard';
 
 export default function SearchPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -92,24 +92,28 @@ export default function SearchPage() {
       >
         {isSuccess && comments?.length > 0 && (
           <ul className="w-full">
-            {comments.map((comment) => (
-              <li key={comment.id} className="py-2">
-                <ResultItemCard comment={comment} query={query} />
-              </li>
-            ))}
+            {isSuccess &&
+              comments?.length > 0 &&
+              comments.map((comment) => (
+                <li key={comment.id} className="py-2">
+                  <ResultItemCard comment={comment} query={query} />
+                </li>
+              ))}
           </ul>
+        )}
+
+        {isLoading && (
+          <div className="flex flex-col space-y-4 items-center justify-center flex-grow">
+            {[...Array(5)].map((_, index) => (
+              <LoaderItemCard key={index} />
+            ))}
+          </div>
         )}
       </div>
 
       {isSuccess && comments?.length === 0 && (
         <div className="flex items-center justify-center flex-grow">
-          <p className="text-center text-gray-500">{`No comments with "${query}" found.`}</p>
-        </div>
-      )}
-
-      {isLoading && (
-        <div className="flex items-center justify-center flex-grow">
-          <LoaderCircleIcon className="animate-spin text-primary w-12 h-12" />
+          <p className="text-center text-gray-500">{`Sorry, no comments were found for "${query}".`}</p>
         </div>
       )}
     </main>

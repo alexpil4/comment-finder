@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
 import { commentNormalize } from '@/utils/commentNormalizer';
 import { Comment } from '@/types/Comment';
 
@@ -21,9 +21,8 @@ export default function ResultItemCard({
     <Card className="flex items-center">
       <div>
         <CardHeader className="p-3 pb-2">
-          <CardTitle className="text-md text-teal-600 first-letter:uppercase">{name}</CardTitle>
-          <CardDescription className="text-xs flex items-center gap-2 ">
-            <Avatar className="w-[30px] h-[30px] text-xs">
+          <CardDescription className="text-sm flex items-center gap-2">
+            <Avatar className="w-[30px] h-[30px] text-sm">
               <AvatarImage
                 src={`https://mighty.tools/mockmind-api/content/human/${postId}.jpg`}
                 alt={`${email}-avatar-image`}
@@ -33,10 +32,13 @@ export default function ResultItemCard({
                 <UserRoundIcon />
               </AvatarFallback>
             </Avatar>
-            {email}
+            <div className="text-md text-teal-600 first-letter:uppercase">{name}</div>
+            <Button className="p-0" variant="link">
+              {email}
+            </Button>
           </CardDescription>
         </CardHeader>
-        <CardContent className="p-3 pt-2 text-sm">
+        <CardContent className="p-3 pt-0 text-sm">
           <p>{commentNormalize(body, query)}</p>
         </CardContent>
       </div>
