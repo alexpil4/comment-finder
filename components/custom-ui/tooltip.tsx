@@ -22,13 +22,18 @@ export default function Tooltip({ children, text, isVisible, arrowPosition, onCl
     <div className="flex-grow flex flex-col items-center">
       {children}
       {isVisible && (
-        <div className="absolute min-w-[290px] top-20 p-2 bg-teal-200 rounded-md text-sm shadow-md">
+        <div
+          role="alert"
+          aria-live="assertive"
+          className="absolute min-w-[290px] top-20 p-2 bg-teal-200 rounded-md text-sm shadow-md"
+        >
           {text}
           <XIcon
             onClick={onClose}
             className="inline pl-[3px] cursor-pointer"
             size={16}
             strokeWidth={3}
+            aria-label="Close tooltip"
           />
           <div
             className={`absolute ${setArrowPosition} bottom-full border-8 border-x-transparent border-t-transparent border-b-teal-200`}
