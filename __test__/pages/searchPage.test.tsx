@@ -4,7 +4,7 @@ import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { TestQueryClientProvider } from '../utils/testQueryClientProvider';
 import SearchPage from '@/app/page';
 
-import Comment from './../../types/Comment';
+import { Comment } from './../../types/Comment';
 
 // Fetch method mocking
 vi.mock('node-fetch', async () => {

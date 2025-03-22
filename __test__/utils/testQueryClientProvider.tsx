@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactNode } from 'react';
 
-// Init a QueryClient for each test
+// Init a QueryClient for tests
 const createTestQueryClient = () =>
   new QueryClient({
     defaultOptions: {
