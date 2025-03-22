@@ -1,4 +1,11 @@
-export function commentNormalize(body: string, query: string) {
+interface Props {
+  body: string;
+  query: string;
+}
+
+export default function CommentPreview(props: Props) {
+  const { body, query } = props;
+
   // Find the position of the query in the body
   const index = body.toLowerCase().indexOf(query.toLowerCase());
 
@@ -17,9 +24,22 @@ export function commentNormalize(body: string, query: string) {
 
   // Highlight the query in the substring
   const regex = new RegExp(`(${query})`, 'gi');
-  return snippet
-    .split(regex)
-    .map((part, index) =>
-      part.toLowerCase() === query.toLowerCase() ? <b key={index}>{part}</b> : part,
-    );
+
+  console.log(
+    snippet
+      .split(regex)
+      .map((part, index) =>
+        part.toLowerCase() === query.toLowerCase() ? <b key={index}>{part}</b> : part,
+      ),
+  );
+
+  return (
+    <p>
+      {snippet
+        .split(regex)
+        .map((part, index) =>
+          part.toLowerCase() === query.toLowerCase() ? <b key={index}>{part}</b> : part,
+        )}
+    </p>
+  );
 }
