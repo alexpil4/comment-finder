@@ -29,10 +29,10 @@ export default function SearchPage() {
 
   useEffect(() => {
     // Set a flag only at the first research
-    if (isSuccess && !isFirstResearch) {
+    if ((isLoading || isSuccess) && !isFirstResearch) {
       setIsFirstResearch(true);
     }
-  }, [isSuccess, isFirstResearch]);
+  }, [isSuccess, isLoading, isFirstResearch]);
 
   // Update input state
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,6 +68,8 @@ export default function SearchPage() {
           arrowPosition="left"
         >
           <Input
+            aria-label="Search for a comment"
+            aria-describedby="search-tooltip"
             name="search"
             type="text"
             placeholder='Search for a comment (e.g., "enim")'
@@ -80,14 +82,15 @@ export default function SearchPage() {
             }}
           />
         </Tooltip>
-        <Button onClick={handleSearch} type="submit">
+        <Button onClick={handleSearch} type="submit" aria-label="Search for comments">
           SEARCH
         </Button>
       </div>
 
       <div
         aria-live="polite"
-        className={`max-w-[950px] px-8 transition-opacity duration-500 ease-out-in ${
+        role="status"
+        className={`max-w-2xl px-8 transition-opacity duration-500 ease-out-in ${
           isFirstResearch ? 'opacity-100' : 'opacity-0'
         }`}
       >
@@ -102,19 +105,25 @@ export default function SearchPage() {
               ))}
           </ul>
         )}
-
-        {isLoading && (
-          <div className="flex flex-col space-y-4 items-center justify-center flex-grow">
-            {[...Array(5)].map((_, index) => (
-              <LoaderItemCard key={index} />
-            ))}
-          </div>
-        )}
       </div>
+
+      {isLoading && (
+        <div
+          className={`space-y-4 transition-opacity duration-500 ease-out-in ${
+            isFirstResearch ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          {[...Array(5)].map((_, index) => (
+            <LoaderItemCard key={index} />
+          ))}
+        </div>
+      )}
 
       {isSuccess && comments?.length === 0 && (
         <div className="flex items-center justify-center flex-grow">
-          <p className="text-center text-gray-500">{`Sorry, no comments were found for "${query}".`}</p>
+          <p role="alert" aria-live="assertive" className="text-center text-gray-500">
+            Sorry, no comments were found for {query}.
+          </p>
         </div>
       )}
     </main>
