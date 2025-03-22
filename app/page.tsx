@@ -68,6 +68,7 @@ export default function SearchPage() {
           arrowPosition="left"
         >
           <Input
+            name="search"
             type="text"
             placeholder='Search for a comment (e.g., "enim")'
             value={searchTerm}
