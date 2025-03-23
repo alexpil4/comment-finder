@@ -25,26 +25,30 @@ export default function SearchPage() {
     queryKey: ['comments', query],
     queryFn: () => getCommentsByQuery(query, 20),
     enabled: query.length > 3,
+    // I decided to avoid the cache timing and cache stale because in real life
+    // comment could be created in any time, so updates must be fresh
   });
 
   useEffect(() => {
-    // Set a flag only at the first research
+    // This flag helps manage positioning and animations of the page based
+    // on whether it's the first time a search has been performed.
     if ((isLoading || isSuccess) && !isFirstSearchDone) {
       setIsFirstSearchDone(true);
     }
   }, [isSuccess, isLoading, isFirstSearchDone]);
 
-  // Update input state
+  // Update state on input change and reset the tooltip visibility if it's open
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setShowInformativeTooltip(false);
     setSearchTerm(event.target.value);
   };
 
+  // Handle the manual close of the tooltip
   const handleCloseTooltip = () => setShowInformativeTooltip(false);
 
   // Handle the submit
   const handleSearch = useCallback(() => {
-    // Check if tooltip must be shown
+    // Check if the tooltip should be shown
     if (searchTerm.length <= 3) {
       setShowInformativeTooltip(true);
       return;
@@ -62,7 +66,8 @@ export default function SearchPage() {
       {!isFirstSearchDone && (
         <>
           <h1 className="text-4xl font-bold text-center text-gray-900 mb-4">
-            Welcome to <span className="text-rose-600">Super Comment Finder</span>
+            Welcome to{' '}
+            <span className="text-rose-600">Super Comment Finder</span>
           </h1>
           <p className="text-lg text-gray-600 text-center mb-2">
             Search for comments across all posts worldwide.
@@ -134,7 +139,11 @@ export default function SearchPage() {
 
       {isSuccess && comments?.length === 0 && (
         <div className="flex items-center justify-center flex-grow">
-          <p role="alert" aria-live="assertive" className="text-center text-gray-500">
+          <p
+            role="alert"
+            aria-live="assertive"
+            className="text-center text-gray-500"
+          >
             {`Sorry, no comments were found for "${query}".`}
           </p>
         </div>
