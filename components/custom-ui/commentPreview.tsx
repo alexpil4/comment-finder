@@ -1,45 +1,40 @@
-interface Props {
-  body: string;
-  query: string;
-}
+import { CommentPreviewProps } from '@/types/Comment';
+import { useMemo } from 'react';
 
-export default function CommentPreview(props: Props) {
-  const { body, query } = props;
+export default function CommentPreview({ body, query }: CommentPreviewProps) {
+  const normalizedComment = useMemo(() => {
+    const lowerBody = body.toLowerCase();
+    const lowerQuery = query.toLowerCase();
+    // Find the position of the query in the body
+    const index = lowerBody.indexOf(lowerQuery);
+    // Comment summary limited to 64 characters
+    const maxLength = 64;
+    const queryLength = query.length;
+    // Subtract the query length from 64 characters, then divide by 2
+    // to correctly calculate the available space without including the query length
+    const remainingLength = maxLength - queryLength;
 
-  // Find the position of the query in the body
-  const index = body.toLowerCase().indexOf(query.toLowerCase());
+    // Calculate the start and the end positions for the substring (64 characters total as requested):
+    const beforeChars = Math.floor(remainingLength / 2);
+    const afterChars = remainingLength - beforeChars;
+    // 32 characters before the query
+    const start = Math.max(0, index - beforeChars);
+    // 32 characters after the query
+    const end = Math.min(body.length, index + queryLength + afterChars);
 
-  // Calculate the start and the end positions for the substring (64 characters total as requested):
+    // Extract the substring and include the query portion
+    const snippet = body.substring(start, end);
 
-  // Subtract the query length from 64 characters, then divide by 2
-  // to correctly calculate the available space without including the query length
-  const commentRest = (64 - query.length) / 2;
-  // 32 characters before the query
-  const start = Math.max(0, index - commentRest);
-  // 32 characters after the query
-  const end = Math.min(body.length, index + query.length + commentRest);
-
-  // Extract the substring and include the query portion
-  const snippet = body.substring(start, end);
-
-  // Highlight the query in the substring
-  const regex = new RegExp(`(${query})`, 'gi');
-
-  console.log(
-    snippet
+    // Highlight the query in the substring
+    const regex = new RegExp(`(${query})`, 'gi');
+    return snippet
       .split(regex)
-      .map((part, index) =>
-        part.toLowerCase() === query.toLowerCase() ? <b key={index}>{part}</b> : part,
-      ),
-  );
+      .map((part, i) => (part.toLowerCase() === lowerQuery ? <b key={i}>{part}</b> : part));
+  }, [body, query]);
 
   return (
-    <p>
-      {snippet
-        .split(regex)
-        .map((part, index) =>
-          part.toLowerCase() === query.toLowerCase() ? <b key={index}>{part}</b> : part,
-        )}
+    <p aria-live="polite" aria-label="Comment preview">
+      {normalizedComment}
     </p>
   );
 }
