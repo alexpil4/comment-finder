@@ -42,11 +42,14 @@ export default function SearchPage() {
 
   const handleCloseTooltip = () => setShowInformativeTooltip(false);
 
+  // Handle the submit
   const handleSearch = useCallback(() => {
+    // Check if tooltip must be shown
     if (searchTerm.length <= 3) {
       setShowInformativeTooltip(true);
       return;
     }
+    // Enable the useQuery (request to the API)
     setQuery(searchTerm);
   }, [searchTerm]);
 
@@ -58,7 +61,7 @@ export default function SearchPage() {
     >
       <div
         className={`relative flex w-full max-w-sm items-center space-x-2 transition-all duration-500 ease-out-in pt-8 pb-12 ${
-          isFirstResearch ? 'top-0' : 'top-4'
+          isFirstResearch ? 'top-0' : 'top-4' // Search bar vertical animation
         }`}
       >
         <Tooltip
@@ -91,7 +94,7 @@ export default function SearchPage() {
         aria-live="polite"
         role="status"
         className={`max-w-3xl px-8 transition-opacity duration-500 ease-out-in ${
-          isFirstResearch ? 'opacity-100' : 'opacity-0'
+          isFirstResearch ? 'opacity-100' : 'opacity-0' // Results animation
         }`}
       >
         {isSuccess && comments?.length > 0 && (
@@ -110,7 +113,7 @@ export default function SearchPage() {
       {isLoading && (
         <div
           className={`space-y-4 transition-opacity duration-500 ease-out-in ${
-            isFirstResearch ? 'opacity-100' : 'opacity-0'
+            isFirstResearch ? 'opacity-100' : 'opacity-0' // Loader animation
           }`}
         >
           {[...Array(5)].map((_, index) => (
