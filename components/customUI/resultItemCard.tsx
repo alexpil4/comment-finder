@@ -1,4 +1,5 @@
 'use client';
+import { useMemo } from 'react';
 
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
 import CommentPreview from '@/components/customUI/commentPreview';
@@ -9,14 +10,18 @@ import { Button } from '@/components/ui/button';
 
 import { ChevronRight } from 'lucide-react';
 import { UserRoundIcon } from 'lucide-react';
+import { getAvatarRandomID } from '@/utils/randomAvatarIDGenerator';
 
 export default function ResultItemCard({
-  comment: { postId, email, name, body, id },
+  comment: { email, name, body, id },
   query,
 }: {
   comment: Comment;
   query: string;
 }) {
+  // Cache the value of a function that return id numbers to get avatar from mighty.tools
+  const randomID = useMemo(() => getAvatarRandomID(), []);
+
   return (
     <Card className="flex items-center" role="article" aria-label={`Result card ${id}`}>
       <div>
@@ -24,7 +29,7 @@ export default function ResultItemCard({
           <CardDescription className="text-sm flex items-center gap-2">
             <Avatar className="w-[30px] h-[30px] text-sm">
               <AvatarImage
-                src={`https://mighty.tools/mockmind-api/content/human/${postId}.jpg`}
+                src={`https://mighty.tools/mockmind-api/content/human/${randomID}.jpg`}
                 alt={`${email}-avatar-image`}
                 loading="lazy"
               />
