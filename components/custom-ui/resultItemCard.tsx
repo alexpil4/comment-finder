@@ -11,14 +11,14 @@ import { ChevronRight } from 'lucide-react';
 import { UserRoundIcon } from 'lucide-react';
 
 export default function ResultItemCard({
-  comment: { postId, email, name, body },
+  comment: { postId, email, name, body, id },
   query,
 }: {
   comment: Comment;
   query: string;
 }) {
   return (
-    <Card className="flex items-center">
+    <Card className="flex items-center" role="article" aria-label={`Result card ${id}`}>
       <div>
         <CardHeader className="p-3 pb-2">
           <CardDescription className="text-sm flex items-center gap-2">

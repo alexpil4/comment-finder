@@ -85,6 +85,7 @@ export default function SearchPage() {
             }}
           />
         </Tooltip>
+
         <Button onClick={handleSearch} type="submit" aria-label="Search button">
           SEARCH
         </Button>

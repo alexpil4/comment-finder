@@ -1,0 +1,44 @@
+[
+  {
+    "postId": 8,
+    "id": 1,
+    "name": "Test Comment 1",
+    "email": "test1@example.com",
+    "body": "Lorem ipsum dolor sit enim amet, consectetur adipiscing elit. Vivamus eu."
+  },
+  {
+    "postId": 3,
+    "id": 2,
+    "name": "Test Comment 2",
+    "email": "test2@example.com",
+    "body": "Sed do eiusmod tempor incididunt ut enim labore et dolore magna aliqua."
+  },
+  {
+    "postId": 1,
+    "id": 3,
+    "name": "Test Comment 3",
+    "email": "test3@example.com",
+    "body": "Curabitur pretium tincidunt enim vitae massa faucibus. Nulla suscipit."
+  },
+  {
+    "postId": 4,
+    "id": 4,
+    "name": "Test Comment 4",
+    "email": "test4@example.com",
+    "body": "Cras at enim id elit vehicula laoreet. Proin sit amet purus nec urna."
+  },
+  {
+    "postId": 2,
+    "id": 5,
+    "name": "Test Comment 5",
+    "email": "test5@example.com",
+    "body": "Vivamus pretium enim eu metus bibendum volutpat. Sed auctor dolor."
+  },
+  {
+    "postId": 10,
+    "id": 6,
+    "name": "Test Comment 6",
+    "email": "test6@example.com",
+    "body": "Maecenas sollicitudin enim vitae purus venenatis bibendum. Integer."
+  }
+]
