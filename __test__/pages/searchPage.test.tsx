@@ -5,6 +5,7 @@ import SearchPage from '@/app/page';
 import { Comment } from '@/types/Comment';
 
 import { TestQueryClientProvider } from '../utils/testQueryClientProvider';
+import comments from '../mocks/comments.json';
 
 // Fetch method mocking
 vi.mock('node-fetch', async () => {
@@ -15,11 +16,8 @@ vi.mock('node-fetch', async () => {
   };
 });
 
-describe('SearchPage', () => {
+describe('The SearchPage test', () => {
   let searchInput: HTMLElement, searchSubmitButton: HTMLElement;
-
-  const mockCommentBody =
-    'This enim is a comment This is a comment This is a comment This is a comment';
 
   // Reset before each test run
   beforeEach(() => {
@@ -29,15 +27,7 @@ describe('SearchPage', () => {
       status: 200,
       statusText: 'OK',
       headers: { 'Content-Type': 'application/json' },
-      json: async (): Promise<Comment[]> => [
-        {
-          postId: 1,
-          id: 1,
-          name: 'Test Comment',
-          email: 'test@example.com',
-          body: mockCommentBody,
-        },
-      ],
+      json: async (): Promise<Comment[]> => comments,
     });
 
     // Page render
@@ -60,13 +50,13 @@ describe('SearchPage', () => {
   });
 
   // 1.
-  test('Should render the search input and submit button', () => {
+  test('should render the search input and submit button', () => {
     expect(searchInput).not.toBeNull();
     expect(searchSubmitButton).not.toBeNull();
   });
 
   // 2.
-  test('Should show tooltip when an empty search query is submitted', async () => {
+  test('should show tooltip when an empty search query is submitted', () => {
     // Simulate the click event of search button
     fireEvent.click(searchSubmitButton);
 
@@ -78,29 +68,30 @@ describe('SearchPage', () => {
   });
 
   // 3.
-  test('Should check there are not results and show tooltip when search query is <= 3 characters', async () => {
-    fireEvent.change(searchInput, { target: { value: '123' } });
+  test('should not start request and show the proper tooltip when search query is <= 3 characters', async () => {
+    // Simulate the click event of search button
+    fireEvent.change(searchInput, { target: { value: 'abc' } });
 
     // Simulate the click event of search button
     fireEvent.click(searchSubmitButton);
 
     // Get the tooltip content
     const tooltip = screen.queryByText(/search requires more than 3 characters/i);
-
     // Check if the tooltip exist within the page
     expect(tooltip).not.toBeNull();
 
-    // Get the card, so the results
-    const card = screen.queryByRole('article');
-
-    // Result should be not visible
-    expect(card).toBeNull();
+    // Check the card
+    const cards = screen.queryAllByRole('article');
+    // Result should be 0, no result cards exist
+    expect(cards.length).toBe(0);
   });
 
   // 4.
-  test('Should render results', async () => {
-    const query = 'enim';
+  test('should render results with comments characters less than or equal to 64 ', async () => {
+    // Simulated query
+    const query = /enim/i;
 
+    // Simulate query type
     fireEvent.change(searchInput, { target: { value: query } });
 
     // Simulate the click event of search button
@@ -112,10 +103,23 @@ describe('SearchPage', () => {
     // Check if the tooltip exist within the page
     expect(tooltip).toBeNull();
 
-    // Wait for a result (card)
-    const card = await screen.findByRole('article');
+    // Wait for result (card)
+    const cards = await screen.findAllByRole('article');
 
-    // Result should be visible
-    expect(card).not.toBeNull();
+    // Results should be exists
+    cards.forEach((card) => {
+      expect(card).not.toBeNull();
+    });
+
+    // Get comments preview element
+    const paragraphs = screen.getAllByRole('paragraph', { name: /Comment preview/i });
+
+    // For each comment:
+    // 1. Get the comment length
+    // 2. Check if the comment characters are less than or equal to 64
+    paragraphs.forEach((paragraph) => {
+      const charCount = paragraph.textContent?.length;
+      expect(charCount).toBeLessThanOrEqual(64);
+    });
   });
 });
