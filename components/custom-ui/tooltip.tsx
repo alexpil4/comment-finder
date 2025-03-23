@@ -1,17 +1,16 @@
 'use client';
 
+import { TooltipProps } from '@/types/Tooltip';
 import clsx from 'clsx';
 import { XIcon } from 'lucide-react';
 
-interface Props {
-  children: React.ReactNode;
-  text: string;
-  isVisible: boolean;
-  arrowPosition: string;
-  onClose: () => void;
-}
-
-export default function Tooltip({ children, text, isVisible, arrowPosition, onClose }: Props) {
+export default function Tooltip({
+  children,
+  text,
+  isVisible,
+  arrowPosition,
+  onClose,
+}: TooltipProps) {
   const setArrowPosition = clsx({
     'left-5': arrowPosition === 'left',
     'right-5': arrowPosition === 'right',

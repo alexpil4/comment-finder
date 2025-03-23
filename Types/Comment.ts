@@ -5,3 +5,8 @@ export interface Comment {
   email: string;
   body: string;
 }
+
+export interface CommentPreviewProps {
+  body: string;
+  query: string;
+}
