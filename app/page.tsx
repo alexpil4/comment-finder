@@ -11,11 +11,15 @@ import Tooltip from '@/components/customUI/tooltip';
 import ResultItemCard from '@/components/customUI/resultItemCard';
 import LoaderItemCard from '@/components/customUI/loaderItemCard';
 
+// Import the dictionary (simulating loading from a file)
+import dictionary from '../data/dictionary.json';
+
 export default function SearchPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [query, setQuery] = useState('');
   const [isFirstSearchDone, setIsFirstSearchDone] = useState(false);
   const [showInformativeTooltip, setShowInformativeTooltip] = useState(false);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
 
   const {
     data: comments,
@@ -26,6 +30,18 @@ export default function SearchPage() {
     queryFn: () => getCommentsByQuery(query, 20),
     enabled: query.length > 3,
   });
+
+  // Update suggestions as the user types
+  useEffect(() => {
+    if (searchTerm.length > 0) {
+      const filteredSuggestions = dictionary.filter((word) =>
+        word.toLowerCase().includes(searchTerm.toLowerCase()),
+      );
+      setSuggestions(filteredSuggestions);
+    } else {
+      setSuggestions([]);
+    }
+  }, [searchTerm]);
 
   useEffect(() => {
     // Set a flag only at the first research
@@ -52,6 +68,15 @@ export default function SearchPage() {
     // Enable the useQuery (request to the API)
     setQuery(searchTerm);
   }, [searchTerm]);
+
+  // Handle selection of a suggestion
+  const handleSuggestionClick = (suggestion: string) => {
+    setSearchTerm(suggestion);
+    setQuery(suggestion);
+    setSuggestions([]);
+  };
+
+  console.log(suggestions);
 
   return (
     <main
@@ -82,6 +107,8 @@ export default function SearchPage() {
           arrowPosition="left"
         >
           <Input
+            suggestions={suggestions}
+            handleSuggestionClick={handleSuggestionClick}
             aria-label="Search for a comment"
             aria-describedby="search-tooltip"
             name="search"
