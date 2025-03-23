@@ -9,9 +9,6 @@ import { Geist } from 'next/font/google';
 import './globals.css';
 
 // I chose Geist Font in this test because it's clean, modern, and easy to read.
-// It fits well with the project’s style, keeping the focus on the content while providing a minimalistic, professional look.
-// I've been using it for a while now, and it works well across various screen sizes.
-
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
