@@ -28,8 +28,10 @@ Key tests are:
 - **Search Request**: Tests that the fetch request doesn’t happen when the search query is too short.
 - **Display Comments**: Tests that comments are displayed correctly (comment with a maximum length of 64 characters) when a valid search is made.
 
-## Error Boundary
+## React components
+I created a dedicated folder for React components, organizing them into two categories: components from ShadCN/UI and custom components that I built.
 
+## Error Boundary
 The app includes an Error Boundary component that wraps the main UI to handle potential errors and shows an error fallback message instead.
 
 ## Bonus Track - Typeahead Feature
