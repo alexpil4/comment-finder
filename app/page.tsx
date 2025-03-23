@@ -62,7 +62,7 @@ export default function SearchPage() {
       {!isFirstSearchDone && (
         <>
           <h1 className="text-4xl font-bold text-center text-gray-900 mb-4">
-            Welcome to <span className="text-rose-600">Global Comment Search</span>
+            Welcome to <span className="text-rose-600">Super Comment Finder</span>
           </h1>
           <p className="text-lg text-gray-600 text-center mb-2">
             Search for comments across all posts worldwide.
