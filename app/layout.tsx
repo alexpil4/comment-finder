@@ -7,6 +7,7 @@ import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persist
 
 import { Geist } from 'next/font/google';
 import './globals.css';
+import ErrorBoundary from '@/components/errorBoundary';
 
 // I chose Geist Font in this test because it's clean, modern, and easy to read.
 const geistSans = Geist({
@@ -48,7 +49,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} antialiased`}>
         {persister && (
           <PersistQueryClientProvider client={queryClient} persistOptions={{ persister }}>
-            {children}
+            <ErrorBoundary>{children}</ErrorBoundary>
           </PersistQueryClientProvider>
         )}
       </body>

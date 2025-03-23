@@ -7,9 +7,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 import { getCommentsByQuery } from './actions';
-import Tooltip from '@/components/custom-ui/tooltip';
-import ResultItemCard from '@/components/custom-ui/resultItemCard';
-import LoaderItemCard from '@/components/custom-ui/loaderItemCard';
+import Tooltip from '@/components/customUI/tooltip';
+import ResultItemCard from '@/components/customUI/resultItemCard';
+import LoaderItemCard from '@/components/customUI/loaderItemCard';
 
 export default function SearchPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -28,6 +28,7 @@ export default function SearchPage() {
   });
 
   useEffect(() => {
+    throw new Error();
     // Set a flag only at the first research
     if ((isLoading || isSuccess) && !isFirstResearch) {
       setIsFirstResearch(true);
@@ -117,9 +118,7 @@ export default function SearchPage() {
             isFirstResearch ? 'opacity-100' : 'opacity-0' // Loader animation
           }`}
         >
-          {[...Array(5)].map((_, index) => (
-            <LoaderItemCard key={index} />
-          ))}
+          <LoaderItemCard />
         </div>
       )}
 
