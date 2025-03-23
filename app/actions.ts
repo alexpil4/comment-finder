@@ -15,13 +15,18 @@ const API_URL = process.env.API_URL;
 
 export async function getCommentsByQuery(query: string, resultsLimit: number): Promise<Comment[]> {
   try {
-    const res = await fetch(`${API_URL}/comments?body_like=${query}&_limit=${resultsLimit}`, {
-      cache: 'no-store',
-    });
-    if (!res.ok) throw new Error();
+    const res = await fetch(
+      `${API_URL}/comments?body_like=${encodeURIComponent(query)}&_limit=${resultsLimit}`,
+      {
+        cache: 'no-store',
+      },
+    );
+    if (!res.ok) {
+      throw new Error(`Failed to fetch comments: ${res.status} ${res.statusText}`);
+    }
     return res.json();
   } catch (error) {
-    console.error(error);
+    console.error('Error fetching comments:', error instanceof Error ? error.message : error);
     return [];
   }
 }
