@@ -5,11 +5,11 @@ import { useQuery } from '@tanstack/react-query';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-
-import { getCommentsByQuery } from './actions';
 import Tooltip from '@/components/customUI/tooltip';
 import ResultItemCard from '@/components/customUI/resultItemCard';
 import LoaderItemCard from '@/components/customUI/loaderItemCard';
+
+import { getCommentsByQuery } from './actions';
 
 export default function SearchPage() {
   const [searchTerm, setSearchTerm] = useState('');

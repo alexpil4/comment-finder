@@ -1,16 +1,22 @@
 'use client';
 import { useMemo } from 'react';
 
-import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
-import CommentPreview from '@/components/customUI/commentPreview';
-import { Comment } from '@/types/Comment';
+import { getAvatarRandomID } from '@/utils/randomAvatarIDGenerator';
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+} from '@/components/ui/card';
+import CommentPreview from '@/components/customUI/commentPreview';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 
 import { ChevronRight } from 'lucide-react';
 import { UserRoundIcon } from 'lucide-react';
-import { getAvatarRandomID } from '@/utils/randomAvatarIDGenerator';
+
+import { Comment } from '@/types/Comment';
 
 export default function ResultItemCard({
   comment: { email, name, body, id },
@@ -23,7 +29,11 @@ export default function ResultItemCard({
   const randomID = useMemo(() => getAvatarRandomID(), []);
 
   return (
-    <Card className="flex items-center w-full" role="article" aria-label={`Result card ${id}`}>
+    <Card
+      className="flex items-center w-full"
+      role="article"
+      aria-label={`Result card ${id}`}
+    >
       <div>
         <CardHeader className="p-3 pb-2">
           <CardDescription className="text-sm flex items-center gap-2">
@@ -37,7 +47,9 @@ export default function ResultItemCard({
                 <UserRoundIcon />
               </AvatarFallback>
             </Avatar>
-            <div className="text-md text-teal-600 first-letter:uppercase">{name}</div>
+            <div className="text-md text-teal-600 first-letter:uppercase">
+              {name}
+            </div>
             <Button className="p-0" variant="link">
               {email}
             </Button>

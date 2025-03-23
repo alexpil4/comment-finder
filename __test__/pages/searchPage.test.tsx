@@ -30,7 +30,7 @@ describe('The SearchPage test', () => {
       json: async (): Promise<Comment[]> => comments,
     });
 
-    // Page render
+    // Page render with query provider
     render(
       <TestQueryClientProvider>
         <SearchPage />
@@ -38,7 +38,9 @@ describe('The SearchPage test', () => {
     );
 
     // Get search input
-    searchInput = screen.getByRole('textbox', { name: /search for a comment/i });
+    searchInput = screen.getByRole('textbox', {
+      name: /search for a comment/i,
+    });
     // Get search button
     searchSubmitButton = screen.getByRole('button', { name: /search button/i });
   });
@@ -61,7 +63,9 @@ describe('The SearchPage test', () => {
     fireEvent.click(searchSubmitButton);
 
     // Get the tooltip content
-    const tooltip = screen.queryByText(/search requires more than 3 characters/i);
+    const tooltip = screen.queryByText(
+      /search requires more than 3 characters/i,
+    );
 
     // Check if the tooltip exist within the page
     expect(tooltip).not.toBeNull();
@@ -76,7 +80,9 @@ describe('The SearchPage test', () => {
     fireEvent.click(searchSubmitButton);
 
     // Get the tooltip content
-    const tooltip = screen.queryByText(/search requires more than 3 characters/i);
+    const tooltip = screen.queryByText(
+      /search requires more than 3 characters/i,
+    );
     // Check if the tooltip exist within the page
     expect(tooltip).not.toBeNull();
 
@@ -98,7 +104,9 @@ describe('The SearchPage test', () => {
     fireEvent.click(searchSubmitButton);
 
     // Get the tooltip content
-    const tooltip = screen.queryByText(/search requires more than 3 characters/i);
+    const tooltip = screen.queryByText(
+      /search requires more than 3 characters/i,
+    );
 
     // Check if the tooltip exist within the page
     expect(tooltip).toBeNull();
@@ -112,7 +120,9 @@ describe('The SearchPage test', () => {
     });
 
     // Get comments preview element
-    const paragraphs = screen.getAllByRole('paragraph', { name: /Comment preview/i });
+    const paragraphs = screen.getAllByRole('paragraph', {
+      name: /Comment preview/i,
+    });
 
     // For each comment:
     // 1. Get the comment length

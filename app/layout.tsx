@@ -5,9 +5,10 @@ import { QueryClient } from '@tanstack/react-query';
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
 
+import ErrorBoundary from '@/components/errorBoundary';
+
 import { Geist } from 'next/font/google';
 import './globals.css';
-import ErrorBoundary from '@/components/errorBoundary';
 
 // I choose Geist Font in this test because it's clean, modern, and easy to read.
 const geistSans = Geist({

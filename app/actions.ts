@@ -19,6 +19,8 @@ export async function getCommentsByQuery(
 ): Promise<Comment[]> {
   try {
     const res = await fetch(
+      // The call is not explicitly visible on console because it is executed by the server that masks the requests.
+      // If there is a review, we can view it using the directive: 'use client'.
       `${API_URL}/comments?body_like=${encodeURIComponent(
         query,
       )}&_limit=${resultsLimit}`,
