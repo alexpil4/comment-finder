@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
-import { commentNormalize } from '@/utils/commentNormalizer';
+import CommentPreview from '@/components/custom-ui/commentPreview';
 import { Comment } from '@/types/Comment';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -44,7 +44,7 @@ export default function ResultItemCard({
           </CardDescription>
         </CardHeader>
         <CardContent className="p-3 pt-0 text-sm">
-          <p>{commentNormalize(body, query)}</p>
+          <CommentPreview body={body} query={query} />
         </CardContent>
       </div>
       <div className="ml-auto pr-3">
