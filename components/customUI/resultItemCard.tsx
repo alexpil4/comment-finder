@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
-import CommentPreview from '@/components/custom-ui/commentPreview';
+import CommentPreview from '@/components/customUI/commentPreview';
 import { Comment } from '@/types/Comment';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
