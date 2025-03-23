@@ -14,7 +14,7 @@ import LoaderItemCard from '@/components/customUI/loaderItemCard';
 export default function SearchPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [query, setQuery] = useState('');
-  const [isFirstResearch, setIsFirstResearch] = useState(false);
+  const [isFirstSearchDone, setIsFirstSearchDone] = useState(false);
   const [showInformativeTooltip, setShowInformativeTooltip] = useState(false);
 
   const {
@@ -28,12 +28,11 @@ export default function SearchPage() {
   });
 
   useEffect(() => {
-    throw new Error();
     // Set a flag only at the first research
-    if ((isLoading || isSuccess) && !isFirstResearch) {
-      setIsFirstResearch(true);
+    if ((isLoading || isSuccess) && !isFirstSearchDone) {
+      setIsFirstSearchDone(true);
     }
-  }, [isSuccess, isLoading, isFirstResearch]);
+  }, [isSuccess, isLoading, isFirstSearchDone]);
 
   // Update input state
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,12 +56,23 @@ export default function SearchPage() {
   return (
     <main
       className={`flex flex-col items-center min-h-screen ${
-        isFirstResearch ? 'justify-top' : 'justify-center'
+        isFirstSearchDone ? 'justify-top' : 'justify-center'
       } `}
     >
+      {!isFirstSearchDone && (
+        <>
+          <h1 className="text-4xl font-bold text-center text-gray-900 mb-4">
+            Welcome to <span className="text-rose-600">Global Comment Search</span>
+          </h1>
+          <p className="text-lg text-gray-600 text-center mb-2">
+            Search for comments across all posts worldwide.
+          </p>
+        </>
+      )}
+
       <div
         className={`relative flex w-full max-w-sm items-center space-x-2 transition-all duration-500 ease-out-in pt-8 pb-12 ${
-          isFirstResearch ? 'top-0' : 'top-4' // Search bar vertical animation
+          isFirstSearchDone ? 'top-0' : 'top-4' // Search bar vertical animation
         }`}
       >
         <Tooltip
@@ -95,8 +105,8 @@ export default function SearchPage() {
       <div
         aria-live="polite"
         role="status"
-        className={`max-w-3xl px-8 transition-opacity duration-500 ease-out-in ${
-          isFirstResearch ? 'opacity-100' : 'opacity-0' // Results animation
+        className={`w-3xl px-8 transition-opacity duration-500 ease-out-in ${
+          isFirstSearchDone ? 'opacity-100' : 'opacity-0' // Results animation
         }`}
       >
         {isSuccess && comments?.length > 0 && (
@@ -115,7 +125,7 @@ export default function SearchPage() {
       {isLoading && (
         <div
           className={`space-y-4 transition-opacity duration-500 ease-out-in ${
-            isFirstResearch ? 'opacity-100' : 'opacity-0' // Loader animation
+            isFirstSearchDone ? 'opacity-100' : 'opacity-0' // Loader animation
           }`}
         >
           <LoaderItemCard />

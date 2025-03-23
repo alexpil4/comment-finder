@@ -9,7 +9,7 @@ export default function LoaderItemCard() {
   return (
     <>
       {[...Array(5)].map((_, index) => (
-        <Card key={index} className="max-w-full sm:max-w-[500px] p-2">
+        <Card key={index} className="min-w-[630px] p-2">
           <CardHeader className="p-3 pb-2">
             <CardDescription className=" flex items-center gap-2">
               <Avatar className="w-[30px] h-[30px]">
@@ -20,7 +20,7 @@ export default function LoaderItemCard() {
               <Skeleton className="h-4 w-[250px]" />
             </CardDescription>
           </CardHeader>
-          <CardContent className="p-3 pt-2 ">
+          <CardContent className="p-2 pt-2 ">
             <Skeleton className="h-4 w-full sm:w-[460px]" />
           </CardContent>
         </Card>
