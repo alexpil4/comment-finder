@@ -23,9 +23,9 @@ export default function ResultItemCard({
   const randomID = useMemo(() => getAvatarRandomID(), []);
 
   return (
-    <Card className="flex items-center w-2xl" role="article" aria-label={`Result card ${id}`}>
+    <Card className="flex items-center w-full" role="article" aria-label={`Result card ${id}`}>
       <div>
-        <CardHeader className="flex-1 p-3 pb-2">
+        <CardHeader className="p-3 pb-2">
           <CardDescription className="text-sm flex items-center gap-2">
             <Avatar className="w-[30px] h-[30px] text-sm">
               <AvatarImage

@@ -105,7 +105,7 @@ export default function SearchPage() {
       <div
         aria-live="polite"
         role="status"
-        className={`w-2xl px-8 transition-opacity duration-500 ease-out-in ${
+        className={`md:w-[768px] px-8 transition-opacity duration-500 ease-out-in ${
           isFirstSearchDone ? 'opacity-100' : 'opacity-0' // Results animation
         }`}
       >

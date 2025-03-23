@@ -17,11 +17,11 @@ export default function LoaderItemCard() {
                   <Skeleton className="h-12 w-12 rounded-full" />
                 </AvatarFallback>
               </Avatar>
-              <Skeleton className="h-4 w-[250px]" />
+              <Skeleton className="h-4 w-[580px]" />
             </CardDescription>
           </CardHeader>
           <CardContent className="p-2 pt-2 ">
-            <Skeleton className="h-4 w-full sm:w-[630px]" />
+            <Skeleton className="h-4 w-full sm:w-[720px]" />
           </CardContent>
         </Card>
       ))}
