@@ -10,6 +10,9 @@ RUN npm install
 # Copy all project into the container
 COPY . .
 
+# Hardcoded ENV variable (JUST FOR INTERVIEW PURPOSE! "Don't try this at home.")
+ENV API_URL=https://jsonplaceholder.typicode.com
+
 # Build production
 RUN npm run build
 
