@@ -46,7 +46,8 @@ export default function SearchPage() {
   // Handle the manual close of the tooltip
   const handleCloseTooltip = () => setShowInformativeTooltip(false);
 
-  // Handle the submit
+  // Handle submit function, the useCallback avoid it from being recreated on every render of the component
+  // if searchTerm dependency doesn't change
   const handleSearch = useCallback(() => {
     // Check if the tooltip should be shown
     if (searchTerm.length <= 3) {

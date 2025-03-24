@@ -26,6 +26,7 @@ export default function ResultItemCard({
   query: string;
 }) {
   // Cache the value of a function that return id numbers to get avatar from mighty.tools
+  // so that it doesn't have to be recalculated every time the component rerender
   const randomID = useMemo(() => getAvatarRandomID(), []);
 
   return (
