@@ -19,6 +19,7 @@ class ErrorBoundary extends Component<Props, State> {
     this.state = { hasError: false, error: { message: '' } };
   }
 
+  //  Catch errors in React components
   static getDerivedStateFromError(error: Error): State {
     console.log(error);
     return { hasError: true, error: error };
@@ -32,7 +33,11 @@ class ErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       return (
         <div className="flex items-center justify-center min-h-screen">
-          <p role="alert" aria-live="assertive" className="text-center text-gray-500">
+          <p
+            role="alert"
+            aria-live="assertive"
+            className="text-center text-gray-500"
+          >
             {this.state.error.message ?? 'Ops, something went wrong!'}
           </p>
         </div>

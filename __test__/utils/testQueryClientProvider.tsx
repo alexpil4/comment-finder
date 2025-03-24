@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactNode } from 'react';
 
-// Init a QueryClient for tests
+// Create a new instance of the QueryClient class for the tests
 const createTestQueryClient = () =>
   new QueryClient({
     defaultOptions: {
@@ -13,5 +13,9 @@ const createTestQueryClient = () =>
 
 export function TestQueryClientProvider({ children }: { children: ReactNode }) {
   const testQueryClient = createTestQueryClient();
-  return <QueryClientProvider client={testQueryClient}>{children}</QueryClientProvider>;
+  return (
+    <QueryClientProvider client={testQueryClient}>
+      {children}
+    </QueryClientProvider>
+  );
 }

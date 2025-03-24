@@ -1,5 +1,6 @@
-import { CommentPreviewProps } from '@/types/Comment';
 import { useMemo } from 'react';
+
+import { CommentPreviewProps } from '@/Types/Comment';
 
 export default function CommentPreview({ body, query }: CommentPreviewProps) {
   const normalizedComment = useMemo(() => {
@@ -29,7 +30,9 @@ export default function CommentPreview({ body, query }: CommentPreviewProps) {
     const regex = new RegExp(`(${query})`, 'gi');
     return snippet
       .split(regex)
-      .map((part, i) => (part.toLowerCase() === lowerQuery ? <b key={i}>{part}</b> : part));
+      .map((part, i) =>
+        part.toLowerCase() === lowerQuery ? <b key={i}>{part}</b> : part,
+      );
   }, [body, query]);
 
   return (

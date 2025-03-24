@@ -5,11 +5,12 @@ import { QueryClient } from '@tanstack/react-query';
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
 
-import { Geist } from 'next/font/google';
-import './globals.css';
 import ErrorBoundary from '@/components/errorBoundary';
 
-// I chose Geist Font in this test because it's clean, modern, and easy to read.
+import { Geist } from 'next/font/google';
+import './globals.css';
+
+// I choose Geist Font in this test because it's clean, modern, and easy to read.
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
@@ -39,7 +40,7 @@ export default function RootLayout({
     : undefined;
 
   // Accessing localStorage directly in a client-side component can lead to errors during server-side rendering (SSR).
-  // So we must ensure tha client is available when we create the storage persister!
+  // So I must check that client is available when we create the storage persister!
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -48,7 +49,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} antialiased`}>
         {persister && (
-          <PersistQueryClientProvider client={queryClient} persistOptions={{ persister }}>
+          <PersistQueryClientProvider
+            client={queryClient}
+            persistOptions={{ persister }}
+          >
             <ErrorBoundary>{children}</ErrorBoundary>
           </PersistQueryClientProvider>
         )}
