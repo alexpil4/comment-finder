@@ -15,6 +15,7 @@ I used Node.js version `23.6.0` and npm version `10.9.2` for managing dependenci
 #### Locally
 
 ⚠️ Please create and set the .ENV file in order to set properly the API url:
+
 `API_URL='https://jsonplaceholder.typicode.com'`.
 
 To start the project locally, run `npm i` and `npm run dev`.
