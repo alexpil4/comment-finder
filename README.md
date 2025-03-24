@@ -15,7 +15,13 @@ To start the project locally, run `npm i` and `npm run dev`.
 
 #### Docker
 
-To start the project in a Docker container, run `docker build -t comment_search:latest .` to build the image and `docker run -p 8080:8080 comment_search:latest` to start the container.
+To build the image run:
+
+`docker build -t comment_search:latest .`
+
+To start the container:
+
+`docker run -p 8080:8080 comment_search:latest`
 
 ## Testing
 
