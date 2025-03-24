@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { TooltipProps } from '@/types/Tooltip';
+import { TooltipProps } from '@/Types/Tooltip';
 import { XIcon } from 'lucide-react';
 
 export default function Tooltip({

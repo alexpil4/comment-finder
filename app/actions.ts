@@ -1,6 +1,6 @@
 'use server';
 
-import { Comment } from '@/types/Comment';
+import { Comment } from '@/Types/Comment';
 
 const API_URL = process.env.API_URL;
 

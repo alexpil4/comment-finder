@@ -2,7 +2,7 @@ import { expect, test, describe, beforeEach, afterEach, vi } from 'vitest';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 
 import SearchPage from '@/app/page';
-import { Comment } from '@/types/Comment';
+import { Comment } from '@/Types/Comment';
 
 import { TestQueryClientProvider } from '../utils/testQueryClientProvider';
 import comments from '../mocks/comments.json';

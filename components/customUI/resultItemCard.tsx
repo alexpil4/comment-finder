@@ -16,7 +16,7 @@ import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
 import { UserRoundIcon } from 'lucide-react';
 
-import { Comment } from '@/types/Comment';
+import { Comment } from '@/Types/Comment';
 
 export default function ResultItemCard({
   comment: { email, name, body, id },

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { CommentPreviewProps } from '@/types/Comment';
+import { CommentPreviewProps } from '@/Types/Comment';
 
 export default function CommentPreview({ body, query }: CommentPreviewProps) {
   const normalizedComment = useMemo(() => {
