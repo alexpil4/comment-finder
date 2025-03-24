@@ -5,6 +5,8 @@
 
 The **Comment Finder** app allows users to search for specific words within comments. By querying an API, the app retrieves comments and displays results that match the user's search term.
 
+**The client-side application is very simple, but I’ve tried to set up the project with a structure that allows it to be scalable over time!**
+
 This project was built using the following technologies and tools: ShadCN/UI for UI components, ReactJS for building the user interface, Next.js as the framework, TypeScript for type safety, Vitest for testing, TanStack for query caching, TanStack Persist for data persistence, and TailwindCSS for styling.
 
 ## Installation
