@@ -9,6 +9,10 @@ The **Comment Finder** app allows users to search for specific words within comm
 
 This project was built using the following technologies and tools: ShadCN/UI for UI components, ReactJS for building the user interface, Next.js as the framework, TypeScript for type safety, Vitest for testing, TanStack for query caching, TanStack Persist for data persistence, and TailwindCSS for styling.
 
+## .ENV
+⚠️ Please create and set the .ENV file in order to set properly the API url:
+`API_URL='https://jsonplaceholder.typicode.com'`.
+
 ## Installation
 I used Node.js version `23.6.0` and npm version `10.9.2` for managing dependencies and running the project.
 
