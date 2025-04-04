@@ -2,7 +2,7 @@
 
 import { Comment } from '@/Types/Comment';
 
-const API_URL = process.env.API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // I read the assignment and than I noticed that the API at https://jsonplaceholder.typicode.com/
 // is currently powered by the stable version of JSON Server (v0),
